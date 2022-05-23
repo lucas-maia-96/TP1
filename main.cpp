@@ -2,20 +2,25 @@
 #include "jogador.h"
 
 int main() {
-  std::cout << "Helo World" << std::endl;
-  std::cout << "git works" << std::endl;
   Jogador a("Joao", 120);
 
-  a.set_carta(0, 2, 'c');
-  a.set_carta(1, 3, 'c');
-  a.set_carta(2, 4, 'c');
-  a.set_carta(3, 5, 'c');
-  a.set_carta(4, 6, 'c');
+  a.set_carta(0, 13, 'c');
+  a.set_carta(1, 12, 'c');
+  a.set_carta(2, 11, 'c');
+  a.set_carta(3, 10, 'c');
+  a.set_carta(4, 1, 'c');
 
-  if (check_flush(a)) {
-    std::cout << "\nDEU FLUSH !!!!" << std::endl;
+  a.organiza_bolha();
+
+  a.imprime_mao();
+
+  if (check_straight(a)) {
+    std::cout << "TEM UM STRAIGTH" << std::endl;
+    if (check_royal_straight(a)) {
+      std::cout << ">>>>>>ROYAL<<<<<<" << std::endl;
+    }
   } else {
-    std::cout << "\nNADA NA MAO" << std::endl;
+    std::cout << "NAO TEM JOGO" << std::endl;
   }
 
   return 0;
