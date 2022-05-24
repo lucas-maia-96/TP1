@@ -1,7 +1,7 @@
 #include "baralho.h"
 
-#define ROYAL_STRAIGHT_FLUSH 10
-#define STRAIGHT_FLUSH 9
+#define ROYAL_STRAIGHT_FLUSH 14
+#define STRAIGHT_FLUSH 11
 #define FOUR 8
 #define FULL_HOUSE 7
 #define FLUSH 6
@@ -28,6 +28,7 @@ class Jogador {
   Carta get_carta(int pos) { return _mao[pos]; };
   void organiza_bolha();
   void imprime_mao();
+  int analisa_mao();
 
  private:
   std::string _nome;
@@ -67,30 +68,32 @@ void Jogador::imprime_mao() {
   std::cout << std::endl;
 }
 
-int check_flush(Jogador a) {
+int check_flush(Jogador *a) {
   int i = 0;
-  char naipe = a.get_carta(0).get_naipe();
+  char naipe = a->get_carta(0).get_naipe();
   for (i = 0; i < 5; i++) {
-    if (a.get_carta(i).get_naipe() != naipe) {
+    if (a->get_carta(i).get_naipe() != naipe) {
       return 0;
     }
   }
   return FLUSH;
 }
 
-void Bolha(Jogador* a) {
+void Bolha(Jogador *a) {
   int i = 0;
   for (i = 0; i < 5; i++) {
   }
 }
 
-int check_straight(Jogador a) {
+int check_straight(Jogador *a) {
   int i = 0;
   // tratando royal straight e straight na mesma funcao
-  if ((a.get_carta(1).get_numero() == a.get_carta(0).get_numero() + 1) ||
-      (a.get_carta(0).get_numero() == 1 && a.get_carta(1).get_numero() == 10)) {
+  if ((a->get_carta(1).get_numero() == a->get_carta(0).get_numero() + 1) ||
+      (a->get_carta(0).get_numero() == 1 &&
+       a->get_carta(1).get_numero() == 10)) {
     for (i = 2; i < 5; i++) {
-      if (a.get_carta(i).get_numero() != a.get_carta(i - 1).get_numero() + 1) {
+      if (a->get_carta(i).get_numero() !=
+          a->get_carta(i - 1).get_numero() + 1) {
         return 0;
       }
     }
@@ -99,11 +102,50 @@ int check_straight(Jogador a) {
   return 0;
 }
 
-bool check_royal_straight(Jogador a) {
+int check_royal_straight(Jogador *a) {
   int i = 0;
   for (i = 2; i < 5; i++) {
-    if ((a.get_carta(0).get_numero() == 1 && a.get_carta(1).get_numero() == 10))
-      return true;
+    if ((a->get_carta(0).get_numero() == 1 &&
+         a->get_carta(1).get_numero() == 10))
+      return 3;
   }
-  return false;
+  return 0;
+}
+
+int check_par(Jogador *a) {
+  int i = 0, j = 0, count = 0, atual = 0, dupla = 0, trinca = 0, quadra = 0;
+  for (i = 0; i < 5; i += count) {
+    count = 0;
+    atual = a->get_carta(i).get_numero();
+    for (j = i; j < 5; j++) {
+      if (a->get_carta(j).get_numero() == atual) {
+        count++;
+      } else {
+        break;
+      }
+    }
+    if (count == 2) {
+      dupla++;
+    } else if (count == 3) {
+      trinca++;
+    } else if (count == 4) {
+      quadra++;
+    }
+  }
+  if (dupla == 1 && trinca == 0) return UM_PAR;
+  if (dupla == 2) return DOIS_PARES;
+  if (trinca == 1 && dupla == 0) return TRINCA;
+  if (trinca == 1 && dupla == 1) return FULL_HOUSE;
+  if (quadra == 1) return FOUR;
+  return 0;
+}
+
+int Jogador::analisa_mao() {
+  this->organiza_bolha();
+  int poder = 0;
+  poder += check_par(this) + check_flush(this) + check_straight(this);
+  if (check_flush(this) && check_straight(this)) {
+    poder += check_royal_straight(this);
+  }
+  return poder;
 }
