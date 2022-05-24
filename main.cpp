@@ -2,6 +2,7 @@
 #include "jogador.h"
 
 int main() {
+  int rodadas, pingo, pote;
   Jogador a("Joao", 120);
 
   a.set_carta(0, 13, 'c');
