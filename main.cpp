@@ -1,8 +1,12 @@
 #include "baralho.h"
 #include "jogador.h"
+#include "lista_joga.h"
 
 int main() {
-  int rodadas, pingo, pote;
+  int rodadas, pingo = 0, pote = 0;
+
+  Jogador *players = nullptr;
+
   Jogador a("Joao", 120);
 
   a.set_carta(0, 13, 'c');
