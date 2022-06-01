@@ -1,6 +1,5 @@
 #include "baralho.h"
 #include "jogador.h"
-#include "lista_joga.h"
 
 int main() {
   int rodadas, pingo = 0, pote = 0;
