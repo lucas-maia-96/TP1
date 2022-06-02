@@ -31,12 +31,15 @@ class Jogador {
   int analisa_mao();
   int get_valor_mao() { return _valor_mao; };
   void reseta_valor_mao() { _valor_mao = 0; };
+  void set_aposta(int a) { _aposta = a; };
+  int get_aposta() { return _aposta; };
 
  private:
   std::string _nome;
   int _saldo;
   Carta _mao[5];
   int _valor_mao;
+  int _aposta;
 };
 
 Jogador::Jogador(std::string nome, int saldo) {
