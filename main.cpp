@@ -1,4 +1,5 @@
 #include <fstream>
+#include <sstream>
 #include <string>
 
 #include "baralho.h"
@@ -25,7 +26,6 @@ int main() {
   a.imprime_mao();
 
   std::cout << std::endl << a.analisa_mao() << std::endl; */
-
   std::fstream entrada;
 
   entrada.open("entrada.txt", std::fstream::in);
@@ -47,16 +47,13 @@ int main() {
 
     for (int j = 0; j < 5; j++) {
       entrada >> cc;
-      std::cout << "TAMANHO CC = " << cc.length() << "<< " << std::endl;
       if (cc.length() == 2) {
-        lista[i]->set_carta(j, (int)cc[0], cc[-1]);
-        std::cout << (int)cc[0] << " " << cc[-1] << " ";
+        lista[i]->set_carta(j, std::stoi(cc), cc[1]);
       } else if (cc.length() == 3) {
-        lista[i]->set_carta(j, stoi(cc.substr(0, 2)), cc[-1]);
-        std::cout << stoi(cc.substr(0, 2)) << " " << cc[-1] << " ";
+        lista[i]->set_carta(j, std::stoi(cc), cc[2]);
       }
     }
-    // lista[i]->imprime_mao();
+    lista[i]->imprime_mao();
   }
 
   return 0;
