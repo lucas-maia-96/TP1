@@ -5,31 +5,36 @@
 #include "baralho.h"
 #include "jogador.h"
 
-int main() {
-  int rodadas = 0, num_players = 0, din_init = 0, pingo = 0, pote = 0;
-  std::string nome;
+int rodadas = 0, din_init = 0, num_players_total = 0;
 
-  std::fstream entrada;
+void ganhadores(Jogador** lista, int num_players) {
+  int maior = 0, ganhador = 0, i = 0;
+  for (i = 0; i < num_players; i++) {
+    if (lista[i]->get_valor_mao() > maior) maior = lista[i]->get_valor_mao();
+  }
+  std::cout << "Ganhou: ";
+  for (i = 0; i < num_players; i++) {
+    if (lista[i]->get_valor_mao() == maior)
+      std::cout << lista[i]->get_name() << " ";
+  }
+  std::cout << std::endl;
+}
 
-  entrada.open("entrada.txt", std::fstream::in);
+void primeira_rodada(std::ifstream& entrada, Jogador** lista) {
+  int num_players = 0, pingo = 0, pote = 0, i = 0, j = 0, aposta = 0;
 
-  entrada >> rodadas >> din_init >> num_players >> pingo;
+  std::string nome, cc;
 
-  Jogador* lista[num_players];
+  entrada >> pingo;
 
-  int aposta = 0;
-
-  std::string cc;
-
-  // PRIMEIRA RODADA COM TODOS JOGADORES
-  for (int i = 0; i < num_players; i++) {
+  for (i = 0; i < num_players_total; i++) {
     aposta = 0;
     entrada >> nome;
     lista[i] = new Jogador(nome, din_init);
     entrada >> aposta;
     lista[i]->set_aposta(aposta);
 
-    for (int j = 0; j < 5; j++) {
+    for (j = 0; j < 5; j++) {
       entrada >> cc;
       if (cc.length() == 2) {
         lista[i]->set_carta(j, std::stoi(cc), cc[1]);
@@ -37,9 +42,28 @@ int main() {
         lista[i]->set_carta(j, std::stoi(cc), cc[2]);
       }
     }
-    lista[i]->organiza_bolha();
+    lista[i]->analisa_mao();
     lista[i]->imprime_mao();
   }
+
+  ganhadores(lista, num_players_total);
+}
+
+void rodada(std::ifstream& entrada) {}
+
+int main() {
+  std::ifstream entrada;
+
+  entrada.open("entrada.txt", std::fstream::in);
+  // PRIMEIRA RODADA COM TODOS JOGADORES
+
+  entrada >> rodadas >> din_init >> num_players_total;
+
+  Jogador* lista[num_players_total];
+
+  primeira_rodada(entrada, lista);
+
+  // Zerar o poder e fazer outras maos
 
   return 0;
 }

@@ -28,11 +28,12 @@ class Jogador {
   Carta get_carta(int pos) { return _mao[pos]; };
   void organiza_bolha();
   void imprime_mao();
-  int analisa_mao();
+  void analisa_mao();
   int get_valor_mao() { return _valor_mao; };
   void reseta_valor_mao() { _valor_mao = 0; };
   void set_aposta(int a) { _aposta = a; };
   int get_aposta() { return _aposta; };
+  void zera_poder() { _valor_mao = 0; }
 
  private:
   std::string _nome;
@@ -72,6 +73,7 @@ void Jogador::imprime_mao() {
     std::cout << _mao[i].get_numero() << _mao[i].get_naipe() << " ";
   }
   std::cout << std::endl;
+  std::cout << "Tem um: " << get_valor_mao() << std::endl;
 }
 
 int check_flush(Jogador *a) {
@@ -146,12 +148,12 @@ int check_par(Jogador *a) {
   return 0;
 }
 
-int Jogador::analisa_mao() {
+void Jogador::analisa_mao() {
   this->organiza_bolha();
   int poder = 0;
   poder += check_par(this) + check_flush(this) + check_straight(this);
   if (check_flush(this) && check_straight(this)) {
     poder += check_royal_straight(this);
   }
-  return poder;
+  this->_valor_mao = poder;
 }
