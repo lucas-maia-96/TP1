@@ -151,9 +151,21 @@ int check_par(Jogador *a) {
 void Jogador::analisa_mao() {
   this->organiza_bolha();
   int poder = 0;
-  poder += check_par(this) + check_flush(this) + check_straight(this);
   if (check_flush(this) && check_straight(this)) {
-    poder += check_royal_straight(this);
+    if (check_royal_straight(this))
+      poder += check_royal_straight(this);
+    else
+      poder += check_flush(this) + check_straight(this);
+  } else if (check_par(this) == FOUR) {
+    poder += check_par(this);
+  } else if (check_par(this) == FULL_HOUSE) {
+    poder += check_par(this);
+  } else if (check_flush(this)) {
+    poder += check_flush(this);
+  } else if (check_straight(this)) {
+    poder += check_straight(this);
+  } else if (check_par(this)) {
+    poder += check_par(this);
   }
   this->_valor_mao = poder;
 }

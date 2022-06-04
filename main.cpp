@@ -49,10 +49,43 @@ void primeira_rodada(std::ifstream& entrada, Jogador** lista) {
   ganhadores(lista, num_players_total);
 }
 
-void rodada(std::ifstream& entrada) {}
+void zera_poder_all(Jogador** lista) {
+  int i = 0;
+  for (i = 0; i < num_players_total; i++) {
+    lista[i]->reseta_valor_mao();
+  }
+}
+
+void rodada(std::ifstream& entrada, Jogador** lista) {
+  int num_players_parc = 0, pingo = 0, i = 0, aposta = 0, j = 0, k = 0;
+  std::string nome_parc, cc;
+  entrada >> num_players_parc >> pingo;
+  for (k = 0; k < num_players_parc; k++) {
+    entrada >> nome_parc;
+    for (i = 0; i < num_players_total; i++) {
+      if (nome_parc == lista[i]->get_name()) {
+        entrada >> aposta;
+        lista[i]->set_aposta(aposta);
+
+        for (j = 0; j < 5; j++) {
+          entrada >> cc;
+          if (cc.length() == 2) {
+            lista[i]->set_carta(j, std::stoi(cc), cc[1]);
+          } else if (cc.length() == 3) {
+            lista[i]->set_carta(j, std::stoi(cc), cc[2]);
+          }
+        }
+        lista[i]->analisa_mao();
+        lista[i]->imprime_mao();
+      }
+    }
+  }
+  ganhadores(lista, num_players_total);
+}
 
 int main() {
   std::ifstream entrada;
+  int i = 0;
 
   entrada.open("entrada.txt", std::fstream::in);
   // PRIMEIRA RODADA COM TODOS JOGADORES
@@ -64,6 +97,13 @@ int main() {
   primeira_rodada(entrada, lista);
 
   // Zerar o poder e fazer outras maos
+
+  zera_poder_all(lista);
+
+  for (i = 1; i < rodadas; i++) {
+    rodada(entrada, lista);
+    zera_poder_all(lista);
+  }
 
   return 0;
 }
