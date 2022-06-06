@@ -24,10 +24,14 @@ std::string STR_MAO(int maior) {
   return "HC";
 }
 
+/* Principal funcao do trabalho: Realiza a comparacao das maos dos jogadores,
+realiza dsempate, computa o pote, imprime o resultado */
+
 void ganhadores(Jogador** lista, int num_players, std::ofstream& saida,
                 int pote) {
   int maior = 0, ganhador = 0, i = 0, desempate = 0, des_2 = 0;
 
+  // teste de insanidade
   for (i = 0; i < num_players; i++) {
     if (insano(lista[i])) {
       saida << "0 0 I" << std::endl;
@@ -35,9 +39,12 @@ void ganhadores(Jogador** lista, int num_players, std::ofstream& saida,
     }
   }
 
+  // verfica a maior mao da rodada
   for (i = 0; i < num_players; i++) {
     if (lista[i]->get_valor_mao() > maior) maior = lista[i]->get_valor_mao();
   }
+
+  // realiza desempate
   for (i = 0; i < num_players; i++) {
     if (lista[i]->get_valor_mao() == maior) {
       if (maior == 14 || maior == 11 || maior == 7 || maior == 6 ||
@@ -66,9 +73,11 @@ void ganhadores(Jogador** lista, int num_players, std::ofstream& saida,
     }
   }
 
+  // Imprime resultado da rodada
   saida << ganhador << " " << pote / ganhador << " " << STR_MAO(maior)
         << std::endl;
 
+  // divite o pote entra os ganhadores
   for (i = 0; i < num_players; i++) {
     if (lista[i]->get_valor_mao() == maior) {
       if (maior == 11 || maior == 7 || maior == 6 || maior == 5) {
@@ -163,6 +172,7 @@ void rodada(std::ifstream& entrada, std::ofstream& saida, Jogador** lista,
   ganhadores(lista, num_players_total, saida, pote);
 }
 
+// ranking dos jogadores, baseado no saldo (bubble sort)
 void ranking_bolha(Jogador** lista, int num_players_total) {
   int i, j, trocou;
   for (i = 0; i < num_players_total; i++) {

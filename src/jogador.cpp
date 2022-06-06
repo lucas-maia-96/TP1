@@ -49,15 +49,18 @@ class Jogador {
   int _maior_carta_mao;
 };
 
+// construtor
 Jogador::Jogador(std::string nome, int saldo) {
   _nome = nome;
   _saldo = saldo;
 }
 
+// insere os valores de uma das 5 cartas da mao do jogador
 void Jogador::set_carta(int pos, int num, char naipe) {
   this->_mao[pos].set_carta(num, naipe);
 }
 
+// organiza a mao do jogador de forma crescente (bubble sort)
 void Jogador::organiza_bolha() {
   int i, j, trocou;
   for (i = 0; i < 5; i++) {
@@ -72,6 +75,7 @@ void Jogador::organiza_bolha() {
   }
 }
 
+// metodo util para verificacoes e testes
 void Jogador::imprime_mao() {
   int i = 0;
   std::cout << "\n" << _nome << ":\n";
@@ -95,7 +99,6 @@ int check_flush(Jogador *a) {
 
 int check_straight(Jogador *a) {
   int i = 0;
-  // tratando royal straight e straight na mesma funcao
   if ((a->get_carta(1).get_numero() == a->get_carta(0).get_numero() + 1) ||
       (a->get_carta(0).get_numero() == 1 &&
        a->get_carta(1).get_numero() == 10)) {
@@ -120,6 +123,7 @@ int check_royal_straight(Jogador *a) {
   return 0;
 }
 
+// verifica Um par, Dois pares, Trinca e FullHouse
 int check_par(Jogador *a) {
   int i = 0, j = 0, count = 0, atual = 0, dupla = 0, trinca = 0, quadra = 0;
   for (i = 0; i < 5; i += count) {
@@ -148,6 +152,7 @@ int check_par(Jogador *a) {
   return 0;
 }
 
+// Desempate de Um par, Dois Pares, Trinca e FullHouse
 int check_maior_carta_par(Jogador *a) {
   int i = 0, j = 0, count = 0, atual = 0, carta_repete = 0;
   if (a->get_valor_mao() != FULL_HOUSE) {
@@ -212,6 +217,7 @@ void Jogador::analisa_mao() {
   this->_valor_mao = poder;
 }
 
+// teste de insanidade
 bool insano(Jogador *a) {
   if (a->get_saldo() < 0)
     return true;
