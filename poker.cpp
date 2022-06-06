@@ -27,6 +27,14 @@ std::string STR_MAO(int maior) {
 void ganhadores(Jogador** lista, int num_players, std::ofstream& saida,
                 int pote) {
   int maior = 0, ganhador = 0, i = 0, desempate = 0, des_2 = 0;
+
+  for (i = 0; i < num_players; i++) {
+    if (insano(lista[i])) {
+      saida << "0 0 I" << std::endl;
+      return;
+    }
+  }
+
   for (i = 0; i < num_players; i++) {
     if (lista[i]->get_valor_mao() > maior) maior = lista[i]->get_valor_mao();
   }
@@ -174,6 +182,7 @@ void imprime_ranking(std::ofstream& saida, Jogador** lista,
   ranking_bolha(lista, num_players_total);
   int i = 0;
   for (i = 0; i < num_players_total; i++) {
+    lista[i]->check_saldo();
     saida << lista[i]->get_name() << " " << lista[i]->get_saldo() << std::endl;
   }
 }

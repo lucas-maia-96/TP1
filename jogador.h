@@ -23,6 +23,7 @@ class Jogador {
   void zera_poder() { _valor_mao = -1; }
   int get_maior_carta_mao() { return _maior_carta_mao; };
   int get_maior_carta_all() { return _maior_carta_all; };
+  void check_saldo();
 
  private:
   std::string _nome;
@@ -41,5 +42,7 @@ int check_straight(Jogador *a);
 int check_royal_straight(Jogador *a);
 
 int check_par(Jogador *a);
+
+bool insano(Jogador *a);
 
 #endif

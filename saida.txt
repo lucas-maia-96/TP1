@@ -1,12 +1,10 @@
-1 1000 S
+1 1850 S
 Gisele
-1 800 OP
-Wagner
-1 1000 F
-Gisele
+0 0 I
+0 0 I
 ####
-Gisele 2050
-Wagner 1350
+Gisele 1900
 John 600
 Giovanni 550
 Thiago 450
+Wagner 0

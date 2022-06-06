@@ -37,6 +37,7 @@ class Jogador {
   void zera_poder() { _valor_mao = -1; }
   int get_maior_carta_mao() { return _maior_carta_mao; };
   int get_maior_carta_all() { return _maior_carta_all; };
+  void check_saldo();
 
  private:
   std::string _nome;
@@ -209,4 +210,15 @@ void Jogador::analisa_mao() {
     _maior_carta_mao = check_maior_carta_par(this);
   }
   this->_valor_mao = poder;
+}
+
+bool insano(Jogador *a) {
+  if (a->get_saldo() < 0)
+    return true;
+  else
+    return false;
+}
+
+void Jogador::check_saldo() {
+  if (_saldo < 0) _saldo = 0;
 }
