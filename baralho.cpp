@@ -1,8 +1,5 @@
 #include <iostream>
 
-#ifndef CARTA
-#define CARTA
-
 class Carta {
  public:
   int get_numero() { return _numero; };
@@ -18,4 +15,7 @@ class Carta {
   char _naipe;
 };
 
-#endif
+Carta::Carta() {
+  _numero = 0;
+  _naipe = 'X';
+}
