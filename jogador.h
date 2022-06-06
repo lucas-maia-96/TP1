@@ -20,7 +20,9 @@ class Jogador {
   void reseta_aposta() { _aposta = 0; };
   void set_aposta(int a) { _aposta = a; };
   int get_aposta() { return _aposta; };
-  void zera_poder() { _valor_mao = 0; }
+  void zera_poder() { _valor_mao = -1; }
+  int get_maior_carta_mao() { return _maior_carta_mao; };
+  int get_maior_carta_all() { return _maior_carta_all; };
 
  private:
   std::string _nome;
@@ -28,6 +30,8 @@ class Jogador {
   Carta _mao[5];
   int _valor_mao;
   int _aposta;
+  int _maior_carta_all;
+  int _maior_carta_mao;
 };
 
 int check_flush(Jogador *a);

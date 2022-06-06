@@ -34,7 +34,9 @@ class Jogador {
   void reseta_aposta() { _aposta = 0; };
   void set_aposta(int a) { _aposta = a; };
   int get_aposta() { return _aposta; };
-  void zera_poder() { _valor_mao = 0; }
+  void zera_poder() { _valor_mao = -1; }
+  int get_maior_carta_mao() { return _maior_carta_mao; };
+  int get_maior_carta_all() { return _maior_carta_all; };
 
  private:
   std::string _nome;
@@ -42,6 +44,8 @@ class Jogador {
   Carta _mao[5];
   int _valor_mao;
   int _aposta;
+  int _maior_carta_all;
+  int _maior_carta_mao;
 };
 
 Jogador::Jogador(std::string nome, int saldo) {
@@ -143,24 +147,66 @@ int check_par(Jogador *a) {
   return 0;
 }
 
+int check_maior_carta_par(Jogador *a) {
+  int i = 0, j = 0, count = 0, atual = 0, carta_repete = 0;
+  if (a->get_valor_mao() != FULL_HOUSE) {
+    for (i = 0; i < 5; i += count) {
+      count = 0;
+      atual = a->get_carta(i).get_numero();
+      for (j = i; j < 5; j++) {
+        if (a->get_carta(j).get_numero() == atual) {
+          count++;
+        } else {
+          break;
+        }
+      }
+      if (count >= 2) carta_repete = atual;
+    }
+  }
+  if (a->get_valor_mao() == FULL_HOUSE) {
+    for (i = 0; i < 5; i += count) {
+      count = 0;
+      atual = a->get_carta(i).get_numero();
+      for (j = i; j < 5; j++) {
+        if (a->get_carta(j).get_numero() == atual) {
+          count++;
+        } else {
+          break;
+        }
+      }
+      if (count == 3) carta_repete = atual;
+    }
+  }
+  return carta_repete;
+}
+
 void Jogador::analisa_mao() {
   this->organiza_bolha();
   int poder = 0;
+  _maior_carta_all = _mao[4].get_numero();
   if (check_flush(this) && check_straight(this)) {
     if (check_royal_straight(this))
       poder += check_royal_straight(this);
-    else
+    else {
       poder += check_flush(this) + check_straight(this);
+      _maior_carta_mao = this->_mao[4].get_numero();
+    }
   } else if (check_par(this) == FOUR) {
     poder += check_par(this);
+    _maior_carta_mao = check_maior_carta_par(this);
+    _maior_carta_all = this->_mao[4].get_numero();
   } else if (check_par(this) == FULL_HOUSE) {
     poder += check_par(this);
+    _maior_carta_mao = check_maior_carta_par(this);
   } else if (check_flush(this)) {
     poder += check_flush(this);
+    _maior_carta_mao = this->_mao[4].get_numero();
   } else if (check_straight(this)) {
     poder += check_straight(this);
+    _maior_carta_mao = this->_mao[4].get_numero();
   } else if (check_par(this)) {
     poder += check_par(this);
+    _maior_carta_mao = check_maior_carta_par(this);
   }
   this->_valor_mao = poder;
 }
