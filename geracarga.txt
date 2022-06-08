@@ -1,0 +1,44 @@
+10 1000
+4 50
+fkqyuqf 150 10C 12C 7P 2P 4E
+xyqvnrty 50 13P 2C 11E 4O 3C
+rzrmzlygfve 200 3E 7E 11P 8P 8C
+qfpdbhlqdqrrc 50 5E 4O 4P 10E 6P
+5 50
+fkqyuqf 250 6O 6O 12O 2E 4O
+xyqvnrty 250 10C 10E 4P 6P 8E
+rzrmzlygfve 250 13O 8C 9P 6P 1P
+qfpdbhlqdqrrc 250 3C 13O 9O 8C 2O
+dnxeuoq 250 7E 6E 10O 3C 5O
+3 50
+fkqyuqf 250 11O 3O 5O 2P 6O
+xyqvnrty 150 11O 4C 6C 9P 12P
+rzrmzlygfve 100 2C 11E 10E 2C 3C
+3 50
+fkqyuqf 50 12O 1P 11C 9C 9C
+xyqvnrty 100 4E 3O 13O 10O 13C
+rzrmzlygfve 200 8C 3O 2P 8E 11O
+2 50
+fkqyuqf 50 4C 12C 12E 5P 9P
+xyqvnrty 250 11P 13C 7C 6O 2E
+2 50
+fkqyuqf 100 7C 9C 3P 10O 4E
+xyqvnrty 50 4O 5P 10P 9C 10P
+5 50
+fkqyuqf 100 10P 6C 4O 10E 12P
+xyqvnrty 150 9E 13O 11C 4O 7O
+rzrmzlygfve 150 9O 2O 12C 3C 11P
+qfpdbhlqdqrrc 50 12O 8E 6C 4P 4E
+dnxeuoq 50 12P 7P 12P 9C 11P
+3 50
+fkqyuqf 200 11P 7O 7C 12O 7P
+xyqvnrty 150 7O 7O 1O 8P 3P
+rzrmzlygfve 150 3E 6C 4P 2P 11C
+2 50
+fkqyuqf 250 10E 12O 10O 6O 8C
+xyqvnrty 200 4C 7C 13C 4E 11C
+4 50
+fkqyuqf 200 9O 7C 8O 13C 2O
+xyqvnrty 250 13P 10E 9E 12O 7O
+rzrmzlygfve 100 12O 7E 1O 8O 4E
+qfpdbhlqdqrrc 200 13C 6C 10P 1C 4O
