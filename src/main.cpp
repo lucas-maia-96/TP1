@@ -7,7 +7,7 @@ int main() {
   std::ofstream saida;
   int i = 0;
 
-  entrada.open("geracarga.txt", std::fstream::in);
+  entrada.open("entrada.txt", std::fstream::in);
   saida.open("saida.txt", std::fstream::out);
   // PRIMEIRA RODADA COM TODOS JOGADORES
 

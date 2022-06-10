@@ -1,25 +1,44 @@
+1 1100 TP
+frxsjybldbef
+1 800 TP
+arzowkkyhid
+1 550 OP
+arzowkkyhid
+1 1150 TK
+fwkhopkmc
+1 600 TP
+scdxrjm
+1 750 OP
+scdxrjm
 1 650 OP
-rzrmzlygfve
-1 1200 OP
-xyqvnrty
-1 778 F
-qfpdbhlqdqrrc
-1 0 HC
-fkqyuqf
-1 0 HC
-fkqyuqf
-1 0 HC
-fkqyuqf
-1 0 HC
-fkqyuqf
-1 0 HC
-fkqyuqf
-1 0 HC
-fkqyuqf
-1 0 HC
-fkqyuqf
+lrbbmqbh
+1 650 OP
+arzowkkyhid
+1 700 F
+lrbbmqbh
+1 500 OP
+lrbbmqbh
+1 600 HC
+lrbbmqbh
+1 950 FK
+arzowkkyhid
+1 650 OP
+lrbbmqbh
+1 650 OP
+scdxrjm
+1 600 OP
+lrbbmqbh
+0 0 I
+0 0 I
+0 0 I
+0 0 I
+0 0 I
 ####
-xyqvnrty 1543
-qfpdbhlqdqrrc 1171
-rzrmzlygfve 993
-fkqyuqf 293
+lrbbmqbh 2600
+scdxrjm 1600
+arzowkkyhid 1550
+fwkhopkmc 1150
+frxsjybldbef 850
+hnwnkuewhsqm 200
+xpklorellnmpa 50
+rcbynecdyg 0

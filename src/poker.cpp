@@ -31,14 +31,6 @@ void ganhadores(Jogador** lista, int num_players, std::ofstream& saida,
                 int pote) {
   int maior = 0, ganhador = 0, i = 0, desempate = 0, des_2 = 0;
 
-  // teste de insanidade
-  for (i = 0; i < num_players; i++) {
-    if (insano(lista[i])) {
-      saida << "0 0 I" << std::endl;
-      return;
-    }
-  }
-
   // verfica a maior mao da rodada
   for (i = 0; i < num_players; i++) {
     if (lista[i]->get_valor_mao() > maior) maior = lista[i]->get_valor_mao();
@@ -164,6 +156,16 @@ void rodada(std::ifstream& entrada, std::ofstream& saida, Jogador** lista,
     }
   }
 
+  // teste de insanidade
+  for (i = 0; i < num_players_total; i++) {
+    if ((lista[i]->get_aposta() + pingo) > lista[i]->get_saldo() ||
+        (lista[i]->get_aposta() % 50 != 0)) {
+      saida << "0 0 I" << std::endl;
+      return;
+    }
+  }
+
+  // formacao do pote
   for (i = 0; i < num_players_total; i++) {
     pote += lista[i]->get_aposta() + pingo;
     lista[i]->tira_saldo(pingo + lista[i]->get_aposta());
