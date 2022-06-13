@@ -11,7 +11,7 @@ SRC_FOLDER = ./src/
 
 # all sources, objs, and header files
 MAIN = Main
-TARGET = tp1.exe
+TARGET = tp1.out
 SRC = $(wildcard $(SRC_FOLDER)*.cpp)
 OBJ = $(patsubst $(SRC_FOLDER)%.cpp, $(OBJ_FOLDER)%.o, $(SRC))
 
@@ -20,6 +20,9 @@ $(OBJ_FOLDER)%.o: $(SRC_FOLDER)%.cpp
 
 all: $(OBJ)
 	$(CC) $(CXXFLAGS) -o $(BIN_FOLDER)$(TARGET) $(OBJ)
+
+gprof: $(OBJ)
+	$(CC) $(CXXFLAGS) -pg -no-pie -fno-builtin -o $(BIN_FOLDER)$(TARGET) $(OBJ)
 
 clean:
 	@rm -rf $(OBJ_FOLDER)* $(BIN_FOLDER)*
